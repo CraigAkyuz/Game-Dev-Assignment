@@ -6,6 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     // The Moving Speed
     public float speed;
+    
+    // Expolsion For Ship when wall is hit
+    public GameObject explode;
 
     //Thrust move ball up and down
     public float thrust;
@@ -60,6 +63,12 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "ground")
         {
             isGrounded = true;
+        }
+
+        if (other.gameObject.tag == "obstacle")
+        {
+            Instantiate(explode, transform.position, transform.rotation);
+            Destroy(gameObject);
         }
     }
 
