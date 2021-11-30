@@ -7,14 +7,11 @@ public class PlayerController : MonoBehaviour
     // The Moving Speed
     public float speed;
 
+    //Thrust move ball up and down
+    public float thrust;
+
     // This holds the rigiboyd component of the object
     private Rigidbody rb;
-
-    // Jump 
-    public Vector3 jump;
-
-    // How much force is in the Jump
-    public float jumpForce = 2.8f;
 
     //keeps track of score
     public int score = 0;
@@ -33,12 +30,28 @@ public class PlayerController : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.3f);
-        jump = new Vector3(0.0f, 2.0f, 0.0f);
+        Vector3 movex = new Vector3(moveHorizontal, 0.0f, 0.1f);
 
+        rb.AddForce(movex * speed);
 
-        rb.AddForce(movement * speed);
-       
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            rb.AddForce(Vector3.up * thrust);
+        }
+
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            rb.AddForce(Vector3.down * thrust);
+        }
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            rb.AddForce(Vector3.left * thrust);
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            rb.AddForce(Vector3.right * thrust);
+        }
+
 
     }
 
@@ -53,14 +66,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isGrounded)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                rb.AddForce(jump * jumpForce, ForceMode.Impulse);
-                isGrounded = false;
-            }
-        }
     }
 
     //when trigger collision happens
