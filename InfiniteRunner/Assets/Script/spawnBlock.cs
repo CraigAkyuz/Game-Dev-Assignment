@@ -8,6 +8,7 @@ public class spawnBlock : MonoBehaviour
     private GameObject Block;
     public GameObject Collectable;
     private float offset = 10.0f;
+    private float coloffset = -2.0f;
     // Use this for initialization
     void Start()
     {
@@ -23,6 +24,7 @@ public class spawnBlock : MonoBehaviour
         Vector3 newPos = new Vector3(transform.position.x, transform.position.y, (float)(transform.position.z + offset));
         Instantiate(Block, newPos, transform.rotation);
 
-        Instantiate(Collectable, newPos, transform.rotation);
+        Vector3 newPos2 = new Vector3(Random.Range(-2f, 2f),Random.Range(0.7f, 2.8f), (float)(transform.position.z + offset));
+        Instantiate(Collectable, newPos2, transform.rotation);
     }
 }

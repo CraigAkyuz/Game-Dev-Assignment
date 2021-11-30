@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     // How much force is in the Jump
     public float jumpForce = 2.8f;
 
+    //keeps track of score
+    public int score = 0;
+
     private bool isGrounded = false;
 
 
@@ -67,7 +70,9 @@ public class PlayerController : MonoBehaviour
         //has a tag called "Pick Up"
         if (other.gameObject.CompareTag("Pick Up"))
         {
-            //deactivat the other object
+            //Add point for User
+            score++;
+            //deactivate the other object
             other.gameObject.SetActive(false);
         }
     }
