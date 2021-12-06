@@ -86,6 +86,7 @@ public class PlayerController : MonoBehaviour
         {
             //Add point for User
             score++;
+            Debug.Log(score);
             //deactivate the other object
             other.gameObject.SetActive(false);
         }
