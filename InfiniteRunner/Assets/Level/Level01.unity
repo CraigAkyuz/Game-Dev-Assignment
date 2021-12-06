@@ -843,7 +843,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.05, y: 3.87, z: -3.06}
+  m_LocalPosition: {x: 0.104, y: 3.86, z: -2.816}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1757,7 +1757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Collectable: {fileID: 7555523129337772582, guid: bb8d473f48e437245b8ec697981b8af1, type: 3}
-  Obstacle: {fileID: 0}
+  Obstacle: {fileID: 1709561601}
 --- !u!65 &1973400634
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2067,6 +2067,22 @@ PrefabInstance:
     - target: {fileID: 4470513905045754173, guid: 7abc2487ecbd3c64b9632b827a85d4fa, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470513905045754174, guid: 7abc2487ecbd3c64b9632b827a85d4fa, type: 3}
+      propertyPath: thrust
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470513905045754175, guid: 7abc2487ecbd3c64b9632b827a85d4fa, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470513905045754175, guid: 7abc2487ecbd3c64b9632b827a85d4fa, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470513905045754175, guid: 7abc2487ecbd3c64b9632b827a85d4fa, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7abc2487ecbd3c64b9632b827a85d4fa, type: 3}
