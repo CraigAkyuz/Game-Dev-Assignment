@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
     // Expolsion For Ship when wall is hit
     public GameObject explode;
 
+    // Bullet
+    public GameObject projectile;
+
     //Thrust move ball up and down
     public float thrust;
 
@@ -18,6 +21,12 @@ public class PlayerController : MonoBehaviour
 
     //keeps track of score
     public int score = 0;
+
+    //Shoot Force
+    public int shootForce = 0;
+
+    private int now = 3;
+
 
     private bool isGrounded = false;
 
@@ -75,6 +84,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButtonDown("Jump"))
+        {
+
+            var bullet = Instantiate(projectile, transform.position, transform.rotation);
+            bullet.GetComponent<Rigidbody>().AddForce(transform.forward * shootForce, ForceMode.Impulse);
+        }
+
+        InvokeRepeating("AddToScore", 1, 1);
+
     }
 
     //when trigger collision happens
@@ -85,11 +103,20 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Pick Up"))
         {
             //Add point for User
-            score++;
+            score = score + 10;
             Debug.Log(score);
             //deactivate the other object
             other.gameObject.SetActive(false);
         }
     }
 
+
+    void AddToScore()
+    {
+        if (now > 0)
+        {
+            score = score + 1;
+            Debug.Log(score);
+        }
+    }
 }
