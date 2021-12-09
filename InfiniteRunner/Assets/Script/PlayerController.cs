@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     // The Moving Speed
     public float speed;
-    
+
     // Expolsion For Ship when wall is hit
     public GameObject explode;
 
@@ -21,20 +21,20 @@ public class PlayerController : MonoBehaviour
 
     //keeps track of score
     public int score = 0;
+    public int totalscore = 0;
+    public int timescore;
+    private bool alive;
+    private float startTime;
 
     //Shoot Force
     public int shootForce = 0;
 
-    private int now = 3;
-
-
-    private bool isGrounded = false;
-
-
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();   
+        rb = GetComponent<Rigidbody>();
+        alive = true;
+        startTime = Time.time;
     }
 
     private void FixedUpdate()
@@ -71,13 +71,16 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "ground")
         {
-            isGrounded = true;
+            Instantiate(explode, transform.position, transform.rotation);
+            Destroy(gameObject);
+            alive = false;
         }
 
         if (other.gameObject.tag == "obstacle")
         {
             Instantiate(explode, transform.position, transform.rotation);
             Destroy(gameObject);
+            alive = false;
         }
     }
 
@@ -91,8 +94,9 @@ public class PlayerController : MonoBehaviour
             bullet.GetComponent<Rigidbody>().AddForce(transform.forward * shootForce, ForceMode.Impulse);
         }
 
-        InvokeRepeating("AddToScore", 1, 1);
-
+        if (alive)
+        timescore = (int)(Time.time - startTime);
+        Debug.Log(totalscore + timescore);
     }
 
     //when trigger collision happens
@@ -103,20 +107,10 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Pick Up"))
         {
             //Add point for User
-            score = score + 10;
-            Debug.Log(score);
+            totalscore += 10;
+            Debug.Log(totalscore + timescore);
             //deactivate the other object
             other.gameObject.SetActive(false);
-        }
-    }
-
-
-    void AddToScore()
-    {
-        if (now > 0)
-        {
-            score = score + 1;
-            Debug.Log(score);
         }
     }
 }
