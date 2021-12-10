@@ -102,7 +102,6 @@ public class PlayerController : MonoBehaviour
 
         if (alive)
         timescore = (int)(Time.time - startTime);
-        Debug.Log(totalscore + timescore);
     }
 
     //when trigger collision happens
@@ -114,9 +113,14 @@ public class PlayerController : MonoBehaviour
         {
             //Add point for User
             totalscore += 10;
-            Debug.Log(totalscore + timescore);
             //deactivate the other object
             other.gameObject.SetActive(false);
         }
+    }
+
+    public int returnScore() {
+
+        score = totalscore + timescore;
+        return score;
     }
 }
