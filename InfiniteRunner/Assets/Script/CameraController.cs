@@ -13,6 +13,11 @@ public class CameraController : MonoBehaviour
         Offset = transform.position - player.transform.position;
     }
 
+    void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
+
     // Update is called once per frame
     void LateUpdate()
     {

@@ -8,7 +8,7 @@ public class spawnBlock : MonoBehaviour
     private GameObject Block;
     public GameObject Collectable;
     public GameObject Obstacle;
-    private float offset = 10.0f;
+    private float offset = 25.0f;
     private float coloffset = 5.0f;
     // Use this for initialization
     void Start()

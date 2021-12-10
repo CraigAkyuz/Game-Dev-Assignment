@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
     // Bullet
     public GameObject projectile;
+    private float timeWhenAllowedNextShoot = 0f;
+    private float timeBetweenShooting = 1f;
 
     //Thrust move ball up and down
     public float thrust;
@@ -87,11 +89,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (timeWhenAllowedNextShoot <= Time.time)
         {
+            if (Input.GetButtonDown("Jump"))
+            {
 
-            var bullet = Instantiate(projectile, transform.position, transform.rotation);
-            bullet.GetComponent<Rigidbody>().AddForce(transform.forward * shootForce, ForceMode.Impulse);
+                var bullet = Instantiate(projectile, transform.position, transform.rotation);
+                bullet.GetComponent<Rigidbody>().AddForce(transform.forward * shootForce, ForceMode.Impulse);
+                timeWhenAllowedNextShoot = Time.time + timeBetweenShooting;
+            }
         }
 
         if (alive)
