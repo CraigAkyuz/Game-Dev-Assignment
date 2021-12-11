@@ -28,6 +28,10 @@ public class PlayerController : MonoBehaviour
     private bool alive;
     private float startTime;
 
+    //adds Shield
+    public GameObject Shield;
+    public bool isShieldActive;
+
     //Shoot Force
     public int shootForce = 0;
 
@@ -71,20 +75,42 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "ground")
+        if (isShieldActive == true)
         {
-            Instantiate(explode, transform.position, transform.rotation);
-            Destroy(gameObject);
-            alive = false;
+            Shield.SetActive(false);
+            Invoke("disableShields", 1.0f);
         }
 
-        if (other.gameObject.tag == "obstacle")
+        if (isShieldActive == false)
         {
-            Instantiate(explode, transform.position, transform.rotation);
-            Destroy(gameObject);
-            alive = false;
+            if (other.gameObject.tag == "ground")
+            {
+                Instantiate(explode, transform.position, transform.rotation);
+                Destroy(gameObject);
+                alive = false;
+            }
+
+            if (other.gameObject.tag == "obstacle")
+            {
+                Instantiate(explode, transform.position, transform.rotation);
+                Destroy(gameObject);
+                alive = false;
+            }
         }
     }
+
+
+    void disableShields()
+    {
+        isShieldActive = false;
+    }
+
+    void enableShields()
+    {
+        isShieldActive = true;
+        Shield.SetActive(true);
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -107,9 +133,16 @@ public class PlayerController : MonoBehaviour
     //when trigger collision happens
     void OnTriggerEnter(Collider other)
     {
-        //if the other object entering our trigger zone
-        //has a tag called "Pick Up"
-        if (other.gameObject.CompareTag("Pick Up"))
+
+
+        if (other.gameObject.CompareTag("Shield"))
+        {
+            Invoke("enableShields", 0.0f);
+            other.gameObject.SetActive(false);
+        }
+       //if the other object entering our trigger zone
+      //has a tag called "Pick Up"
+       if (other.gameObject.CompareTag("Pick Up"))
         {
             //Add point for User
             totalscore += 10;

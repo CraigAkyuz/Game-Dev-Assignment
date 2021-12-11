@@ -8,9 +8,11 @@ public class spawnBlock : MonoBehaviour
     private GameObject Block;
     public GameObject Collectable;
     public GameObject Obstacle;
+    public GameObject Shieldpickup;
     private float offset = 15.0f;
     private float offset2 = 25.0f;
     private float coloffset = 5.0f;
+    private float shieldoffset = 30.0f;
     // Use this for initialization
     void Start()
     {
@@ -18,6 +20,7 @@ public class spawnBlock : MonoBehaviour
         Block = GameObject.Find("Block");
         Collectable = GameObject.Find("Collectable");
         Obstacle = GameObject.Find("Obstacle");
+        Shieldpickup = GameObject.Find("Shieldpickup");
     }
 
 
@@ -37,6 +40,9 @@ public class spawnBlock : MonoBehaviour
 
             Vector3 newPos4 = new Vector3(Random.Range(-3.5f, 4.2f), Random.Range(0.7f, 5.4f), (float)(transform.position.z + offset2));
             Instantiate(Obstacle, newPos4, transform.rotation);
+
+            Vector3 newPos5 = new Vector3(Random.Range(-3.5f, 4.2f), Random.Range(0.7f, 5.4f), (float)(transform.position.z + shieldoffset));
+            Instantiate(Shieldpickup, newPos5, transform.rotation);
         }
     }
 }
