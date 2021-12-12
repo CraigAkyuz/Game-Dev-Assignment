@@ -35,6 +35,9 @@ public class PlayerController : MonoBehaviour
     //Shoot Force
     public int shootForce = 0;
 
+    //game over screen
+    public Canvas GOCanvas;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -88,6 +91,7 @@ public class PlayerController : MonoBehaviour
                 Instantiate(explode, transform.position, transform.rotation);
                 Destroy(gameObject);
                 alive = false;
+                GOCanvas.GetComponent<Canvas>().enabled = true;
             }
 
             if (other.gameObject.tag == "obstacle")
@@ -95,6 +99,7 @@ public class PlayerController : MonoBehaviour
                 Instantiate(explode, transform.position, transform.rotation);
                 Destroy(gameObject);
                 alive = false;
+                GOCanvas.GetComponent<Canvas>().enabled = true;
             }
         }
     }
